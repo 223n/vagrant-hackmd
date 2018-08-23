@@ -1,0 +1,21 @@
+- name: Deploy HackMD
+  hosts: all
+  pre_tasks:
+    - name: update cache and cleanup package
+      apt:
+        update_cache: yes
+        autoremove: yes
+  roles:
+    - etckeeper
+    - git
+    - tig
+    - docker
+    - hackmd
+  tasks:
+    - name: startup docker-compose
+      shell: docker-compose up -d
+      args:
+        chdir: /docker/hackmd/
+    - name: Finish display message
+      debug:
+        msg: "Let's HackMD!"

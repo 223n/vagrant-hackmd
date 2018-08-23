@@ -1,0 +1,6 @@
+- name: Make directory
+  file: path=/docker/hackmd state=directory mode=0777
+
+- name: HackMD download
+  git: repo=https://github.com/hackmdio/docker-hackmd.git dest=/docker/hackmd version=master
+  become: false

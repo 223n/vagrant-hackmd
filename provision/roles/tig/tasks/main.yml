@@ -1,0 +1,5 @@
+- name: install tig
+  apt:
+    name: tig
+    update_cache: yes
+

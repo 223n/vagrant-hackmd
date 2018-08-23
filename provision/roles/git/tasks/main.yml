@@ -1,0 +1,44 @@
+- name: install git
+  apt:
+    name: git
+    update_cache: yes
+- name: git setting user name
+  git_config:
+    name: user.name
+    scope: global
+    value: "{{ user_name }}"
+- name: git setting user email
+  git_config:
+    name: user.email
+    scope: global
+    value: "{{ user_email }}"
+- name: git setting editor
+  git_config:
+    name: core.editor
+    scope: global
+    value: "{{ editor }}"
+- name: git setting quotepath
+  git_config:
+    name: core.quotepath
+    scope: global
+    value: "{{ quotepath }}"
+- name: git setting color ui
+  git_config:
+    name: color.ui
+    scope: global
+    value: "{{ ui_color }}"
+- name: git setting color diff
+  git_config:
+    name: color.diff
+    scope: global
+    value: "{{ diff_color }}"
+- name: git setting color status
+  git_config:
+    name: color.status
+    scope: global
+    value: "{{ status_color }}"
+- name: git setting color branch
+  git_config:
+    name: color.branch
+    scope: global
+    value: "{{ branch_color }}"
