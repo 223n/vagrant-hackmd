@@ -4,3 +4,19 @@
 - name: HackMD download
   git: repo=https://github.com/hackmdio/docker-hackmd.git dest=/docker/hackmd version=master
   become: false
+- name: Create Backup Directory
+  file: path=/docker/hackmd/backup.d/ state=directory owner=root group=root group=root mode=0777
+- name: Backup Cron
+  cron:
+    name: backup hackmd
+    cron_file: cron_hackmd
+    user: root
+    hour: 2
+    job: docker-compose -f /docker/hackmd/docker-compose.yml exec database pg_dump hackmd -U hackmd > /docker/hackmd/backup.d/backup_`date '+%Y-%m-%d'`.sql
+- name: Delete Backup Cron
+  cron:
+    name: delete backup hackmd
+    cron_file: cron_hackmd
+    user: root
+    hour: 2
+    job: find /docker/hackmd/backup.d/ -type f -name "*.sql" -mtime +90 | xargs rm -f
