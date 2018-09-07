@@ -4,7 +4,7 @@ if [ ! -f /usr/bin/dirmngr ]; then
 fi
 if [ ! -f /etc/apt/sources.list.d/ansible.list ]; then
   echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main">/etc/apt/sources.list.d/ansible.list
-  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 93C4A3FD7BB9C367
   apt-get update
 fi
 if [ ! -f /usr/bin/ansible ]; then
